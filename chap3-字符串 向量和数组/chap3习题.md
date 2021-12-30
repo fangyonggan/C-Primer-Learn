@@ -275,3 +275,123 @@ vector<string> v6{ 10 };  // size:10, value:""
 vector<string> v7{ 10, "hi" };  // size:10, value:"hi"
 ```
 
+## 练习3.17
+
+从cin读入一组词并把它们存入一个vector对象，然后设法把所有词都改为大写形式。输出改变后的结果，每个词占一行。
+
+解：
+
+```c++
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+     vector<string> v2; //空vector对象
+     string tmp;
+     while(cin >> tmp)
+     {
+          if (tmp == "q!"){
+               break;
+          }
+          v2.push_back(tmp);
+     }
+     for (auto &a : v2)
+     {
+          for (auto &b : a)
+          {
+               b = toupper(b);
+          }
+          //cout << a << endl;
+     }
+     for (auto s : v2){
+          cout << s << endl;
+     }
+     return 0;
+}
+```
+
+## 练习3.18
+
+下面的程序合法吗？如果不合法，你准备如何修改？
+
+```c++
+vector<int> ivec;
+ivec[0] = 42;
+```
+
+解答：
+
+不合法。ivec是空的，不能通过索引添加元素，ivec[0]不合法，应改为
+
+```c++
+vector<int> ivec;
+ivec.push_back(42);
+```
+
+## 练习3.19
+
+如果想定义一个含有10个元素的vector对象，所有元素的值都是42，请例举三种不同的实现方法，哪种方式更好呢？
+
+解：
+
+```c++
+vector<int> ivec1(10,42); //相同元素值，推荐这种
+vector<int> ivec2{ 42, 42, 42, 42, 42, 42, 42, 42, 42, 42 };
+vector<int> ivec3;
+for (int i = 0; i < 10; ++i)
+	ivec3.push_back(42);
+```
+
+## 练习3.20
+
+读入一组整数并把他们存入一个vector对象，将每对相邻整数的和输出出来。改写你的程序，这次要求先输出第一个和最后一个元素的和，接着输出第二个和倒数第二个元素的和，以此类推。
+
+解：
+
+```c++
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <vector>
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::vector;
+using std::string;
+
+int main()
+{
+	vector<int> ivec;
+	int i;
+	while (cin >> i)
+	{
+		ivec.push_back(i);
+	}
+
+	for (int i = 0; i < ivec.size() - 1; ++i)
+	{
+		cout << ivec[i] + ivec[i + 1] << endl;
+	}
+	
+	//---------------------------------
+	cout << "---------------------------------" << endl;
+	
+	int m = 0;
+	int n = ivec.size() - 1;
+	while (m < n)
+	{
+		cout << ivec[m] + ivec[n] << endl;
+		++m;
+		--n;
+	}
+	return 0;
+}
+```
+
+## 
+
